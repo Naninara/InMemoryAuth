@@ -27,7 +27,10 @@ public class SecConfig extends WebSecurityConfigurerAdapter {
     //autherization
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http
+                .httpBasic()
+                .and()
+                .authorizeRequests()
                 .antMatchers("/admin/**").hasRole("admin")
                 .antMatchers("/student/**").hasAnyRole("student","admin")
                 .antMatchers("/**").permitAll()
